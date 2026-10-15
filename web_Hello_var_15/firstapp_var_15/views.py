@@ -1,4 +1,9 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
+
+
+def redirect_to_navigator(_):
+    return HttpResponseRedirect("/navigator")
 
 def navigator(request):
     return render(request, "navigator.html")
