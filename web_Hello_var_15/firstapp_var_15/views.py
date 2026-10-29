@@ -1,5 +1,18 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+import os.path
+
+def get_content_list():
+    cat = []
+    dirpath = os.path.dirname(os.path.abspath(__file__))
+    # Чтение всех строк до конца файла
+    f = open('D:\PracticePython_2pt\web_Hello_var_15\web_Hello_var_15\\tablica\hard_data.txt', "r", encoding="utf-8")
+    for line in f:  # Построчное чтение до конца файла
+        cat.append(line)#print(line, end='')
+    f.close()
+    #cat = ["Ноутбуки", "Принтеры", "Сканеры", "Системные блоки", "Роутеры", "Диски"]
+    return cat
+
 
 
 def redirect_to_navigator(_):
@@ -12,7 +25,8 @@ def navigator(request):
     return render(request, "navigator.html")
 
 def homepage(request):
-    return render(request, "home.html")
+    content_list = get_content_list()
+    return render(request, 'home.html', context={'content_list':content_list})
 
 def graphic_cards(request):
     return render(request, "graphic_cards.html")
