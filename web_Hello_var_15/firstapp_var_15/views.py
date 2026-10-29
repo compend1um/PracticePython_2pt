@@ -1,8 +1,10 @@
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.conf import settings
 import os.path
 import pandas as pd
+from . import forms
 
 def get_content_list():
     cat = []
@@ -15,7 +17,14 @@ def get_content_list():
     #cat = ["Ноутбуки", "Принтеры", "Сканеры", "Системные блоки", "Роутеры", "Диски"]
     return cat
 
+def client(request):
+    userform = forms.UserForm()
+    return render(request, "client.html",{"form":userform})
 
+def postuser(request):
+    name = request.POST.get("name", "Undefined")
+    surname = request.POST.get("surname", "Undefined")
+    return HttpResponse(f"<h2>Имя: {name}  Возраст: {surname}</h2>")
 
 def redirect_to_navigator(_):
     return HttpResponseRedirect("/navigator")
