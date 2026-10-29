@@ -12,6 +12,7 @@ urlpatterns = [
     path('ssd/', views.ssd),
     path('hdd/', views.hdd),
     path('hdd/', views.hdd),
-    path('', views.redirect_to_navigator),
+    path('homepage/', views.homepage),
+    path('', views.redirect_to_homepage),
 
 ]

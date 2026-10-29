@@ -5,8 +5,14 @@ from django.shortcuts import render
 def redirect_to_navigator(_):
     return HttpResponseRedirect("/navigator")
 
+def redirect_to_homepage(_):
+    return HttpResponseRedirect("/homepage")
+
 def navigator(request):
     return render(request, "navigator.html")
+
+def homepage(request):
+    return render(request, "home.html")
 
 def graphic_cards(request):
     return render(request, "graphic_cards.html")
