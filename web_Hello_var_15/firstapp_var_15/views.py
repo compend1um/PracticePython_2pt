@@ -1,6 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.conf import settings
 import os.path
+import pandas as pd
 
 def get_content_list():
     cat = []
@@ -29,28 +31,86 @@ def homepage(request):
     return render(request, 'home.html', context={'content_list':content_list})
 
 def graphic_cards(request):
-    return render(request, "graphic_cards.html")
+    df = pd.read_excel(os.path.join(settings.BASE_DIR, "web_Hello_var_15", "tablica", "gpu.xlsx"))
+    headers = df.columns.tolist()
+    data = df.to_dict('records')
+    context = {
+        'headers': headers,
+        'data': data,
+        'title': 'GPU'
+    }
+    return render(request, "graphic_cards.html", context)
 
 def cases(request):
-    return render(request, "cases.html")
+    df = pd.read_excel(os.path.join(settings.BASE_DIR, "web_Hello_var_15", "tablica", "case.xlsx"))
+    headers = df.columns.tolist()
+    data = df.to_dict('records')
+    context = {
+        'headers': headers,
+        'data': data,
+        'title': 'Корпуса'
+    }
+    return render(request, "cases.html", context)
 
 def hdd(request):
-    return render(request, "hdd.html")
+    df = pd.read_excel(os.path.join(settings.BASE_DIR, "web_Hello_var_15", "tablica", "hdd.xlsx"))
+    headers = df.columns.tolist()
+    data = df.to_dict('records')
+    context = {
+        'headers': headers,
+        'data': data,
+    }
+    return render(request, "hdd.html", context)
 
 def motherboards(request):
-    return render(request, "motherboards.html")
+    df = pd.read_excel(os.path.join(settings.BASE_DIR, "web_Hello_var_15", "tablica", "motherboard.xlsx"))
+    headers = df.columns.tolist()
+    data = df.to_dict('records')
+    context = {
+        'headers': headers,
+        'data': data,
+    }
+    return render(request, "motherboards.html", context)
 
 def power_supply(request):
-    return render(request, "power_supply.html")
+    df = pd.read_excel(os.path.join(settings.BASE_DIR, "web_Hello_var_15", "tablica", "power_supply.xlsx"))
+    headers = df.columns.tolist()
+    data = df.to_dict('records')
+    context = {
+        'headers': headers,
+        'data': data,
+    }
+    return render(request, "power_supply.html", context)
 
 def processors(request):
-    return render(request, "processors.html")
+    df = pd.read_excel(os.path.join(settings.BASE_DIR, "web_Hello_var_15", "tablica", "cpu.xlsx"))
+    headers = df.columns.tolist()
+    data = df.to_dict('records')
+    context = {
+        'headers': headers,
+        'data': data,
+    }
+    return render(request, "processors.html", context)
 
 def ram(request):
-    return render(request, "ram.html")
+    df = pd.read_excel(os.path.join(settings.BASE_DIR, "web_Hello_var_15", "tablica", "ram.xlsx"))
+    headers = df.columns.tolist()
+    data = df.to_dict('records')
+    context = {
+        'headers': headers,
+        'data': data,
+    }
+    return render(request, "ram.html", context)
 
 def ssd(request):
-    return render(request, "ssd.html")
+    df = pd.read_excel(os.path.join(settings.BASE_DIR, "web_Hello_var_15", "tablica", "ssd.xlsx"))
+    headers = df.columns.tolist()
+    data = df.to_dict('records')
+    context = {
+        'headers': headers,
+        'data': data,
+    }
+    return render(request, "ssd.html", context)
 
 
 
