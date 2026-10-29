@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 import os.path
 import pandas as pd
@@ -121,6 +121,59 @@ def ssd(request):
     }
     return render(request, "ssd.html", context)
 
+
+# Функция для показа формы и приема данных
+def buy_component(request):
+    if request.method == 'POST':
+        form = forms.PurchaseForm(request.POST)
+        if form.is_valid():
+            # Берем данные из формы
+            name = form.cleaned_data['name']
+            quantity = form.cleaned_data['quantity']
+            component = form.cleaned_data['component']
+            # Склеиваем галочки через запятую (например, "Гарантия, Доставка")
+            extras = ", ".join(form.cleaned_data['extras'])
+
+            if not extras:
+                extras = "Нет"
+
+            # Записываем в Excel
+            file_path = os.path.join(settings.BASE_DIR, "web_Hello_var_15", "tablica", "purchase_log.xlsx")
+
+            # Создаем строчку для таблицы
+            new_row = pd.DataFrame([{
+                'Имя': name,
+                'Комплектующее': component,
+                'Количество': quantity,
+                'Дополнительно': extras
+            }])
+
+            # Если файл есть - дописываем, если нет - создаем
+            if os.path.exists(file_path):
+                old_data = pd.read_excel(file_path)
+                pd.concat([old_data, new_row]).to_excel(file_path, index=False)
+            else:
+                new_row.to_excel(file_path, index=False)
+
+            # ПЕРЕАДРЕСАЦИЯ (GET-запрос) на страницу результата
+            # Мы просто добавляем данные в конец адресной строки
+            return redirect(f'/success/?name={name}&comp={component}&qty={quantity}&extras={extras}')
+    else:
+        form = forms.PurchaseForm()
+
+    return render(request, "buy.html", {'form': form})
+
+
+# Функция для страницы результата (принимает GET-запрос)
+def purchase_success(request):
+    # Достаем данные из адресной строки
+    context = {
+        'name': request.GET.get('name'),
+        'comp': request.GET.get('comp'),
+        'qty': request.GET.get('qty'),
+        'extras': request.GET.get('extras'),
+    }
+    return render(request, "purchase_result.html", context)
 
 
 

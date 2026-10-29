@@ -11,9 +11,11 @@ urlpatterns = [
     path('cases/', views.cases),
     path('ssd/', views.ssd),
     path('hdd/', views.hdd),
-    path('homepage/', views.homepage),
+    path('homepage', views.homepage),
     path('client', views.client),
     path('postuser', views.postuser),
+    path('buy/', views.buy_component, name='buy_component'),
+    path('success/', views.purchase_success, name='success'),
     path('', views.redirect_to_homepage),
 
 ]
