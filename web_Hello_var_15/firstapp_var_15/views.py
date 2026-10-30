@@ -10,7 +10,8 @@ def get_content_list():
     cat = []
     dirpath = os.path.dirname(os.path.abspath(__file__))
     # Чтение всех строк до конца файла
-    f = open('D:\PracticePython_2pt\web_Hello_var_15\web_Hello_var_15\\tablica\hard_data.txt', "r", encoding="utf-8")
+    # f = open('D:\PracticePython_2pt\web_Hello_var_15\web_Hello_var_15\\tablica\hard_data.txt', "r", encoding="utf-8")
+    f = open('D:\SEASON 2\Python_Yazev\PracticePython_2pt\web_Hello_var_15\web_Hello_var_15\\tablica\hard_data.txt', "r", encoding="utf-8")
     for line in f:  # Построчное чтение до конца файла
         cat.append(line)#print(line, end='')
     f.close()
