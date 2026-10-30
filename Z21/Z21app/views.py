@@ -36,3 +36,12 @@ def edit(request, id):
 
     except GPU.DoesNotExist:
         return HttpResponseNotFound("<h2> Клиент не найден</h2>")
+
+
+def delete(request, id):
+    try:
+        person=GPU.objects.get(id=id)
+        person.delete()
+        return HttpResponseRedirect("/")
+    except GPU.DoesNotExist:
+        return HttpResponseNotFound("<h2>Клиент не найден</h2>")
