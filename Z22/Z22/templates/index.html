@@ -8,8 +8,21 @@
     <title>Главная</title>
 </head>
 <body>
-
-
+    <h2>Список видеокарт</h2>
+    <a href="create/">Добавление видеокарты</a>
+    <table>
+        <thead><th>Название</th><th>Цена</th><th>Бренд</th><th></th></thead>
+        {% for model in models %}
+        <tr>
+            <td>{{ model.name }}</td>
+            <td>{{ model.price }}</td>
+            <td>{{ model.brand.name }}</td>
+            <td>
+                <a href="edit/{{model.id}}">Изменить</a> | <a href="delete/{{model.id}}">Удалить</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 
 </body>
 </html>

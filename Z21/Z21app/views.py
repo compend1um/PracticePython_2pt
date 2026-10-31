@@ -32,7 +32,7 @@ def edit(request, id):
             gpus.save()
             return HttpResponseRedirect("/")
         else:
-            return render(request, "edit.html", {"gpus": gpus})
+            return render(request, "create.html", {"gpus": gpus})
 
     except GPU.DoesNotExist:
         return HttpResponseNotFound("<h2> Клиент не найден</h2>")
