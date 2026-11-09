@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+
+<aside>
+    <h3>Навигация</h3>
+    <ul><a href="{% url 'customers' %}">Клиенты</a></ul>
+    <ul><a href="{% url 'products' %}">Товары</a></ul>
+    <ul><a href="{% url 'sale' %}">Продажа</a></ul>
+    <ul><a href="{% url 'sales_progress' %}">Ход продаж</a></ul>
+</aside>
+
+<main>
+    {% block body %}
+    {% endblock body %}
+</main>
+
+</body>
+</html>
