@@ -77,7 +77,7 @@ DATABASES = {'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'prodagadb',
         'USER': 'postgres',
-        'PASSWORD': '',
+        'PASSWORD': '12345678',
         'HOST': '127.0.0.1',
         'PORT': '5434',
     }
@@ -120,7 +120,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "z3" / "static",
 ]
 
 
