@@ -1,9 +1,35 @@
 {% extends 'layout.html' %}
 
-{% block title %}Products{% endblock title %}
+{% block title %}Товары{% endblock %}
 
-{% block body %}
+{% block content %}
+<h2>Список товаров</h2>
 
-<h>its products</h>
-
-{% endblock body %}
+<table class="text-center">
+    <thead>
+    <tr>
+        <th>Название видеокарты</th>
+        <th>Тип видеопамяти</th>
+        <th>Частота видеопамяти</th>
+        <th>Количество видеопамяти</th>
+        <th>Цена</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for gpu in gpus %}
+    <tr>
+        <td>{{ gpu.name }}</td>
+        <td>{{ gpu.spec.memory_type }}</td>
+        <td>{{ gpu.spec.frequency }} MHz</td>
+        <td>{{ gpu.spec.memory_size }} GB</td>
+        <td class="text-nowrap">{{ gpu.price }} ₽</td>
+        <td class ="text-nowrap">
+            <a href="{% url 'edit_gpu' gpu.pk %}" class="btn btn-primary btn-sm">Изменить</a>
+            <a href="{% url 'delete_gpu' gpu.pk %}" class="btn btn-danger btn-sm">Удалить</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br><a href="{% url 'create_gpu' %}" class="btn btn-success">Добавить видеокарту</a>
+{% endblock %}

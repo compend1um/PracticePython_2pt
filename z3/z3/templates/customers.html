@@ -1,9 +1,36 @@
 {% extends 'layout.html' %}
 
-{% block title %}Клиенты{% endblock title %}
+{% block title %}Клиенты{% endblock %}
 
-{% block body %}
+{% block content %}
+<form method="POST" action="{% url 'create_client' %}">
+    {% csrf_token %}
+    <h2>Клиенты</h2>
+    <p>
+        <label>Ввести клиента:</label><br>
+        <input type="text" name = "client"/>
+    </p>
+    <input class = "btn btn-primary" type="submit" value = "Сохранить">
+</form>
 
-<h>its покупатели</h>
+<table>
+    <thead>
+    <th>Id</th><th>Клиент</th>
+    </thead>
+    {% for client in clients   %}
+    <tr>
+        <td>{{client.id}}</td>
+        <td>{{client.name}}</td>
+        <td>
+            <a href="{% url 'edit_client' client.id %}" class="btn btn-secondary btn-sm me-2">Изменить</a>
+            <a href="{% url 'delete_client' client.id %}" class="btn btn-danger btn-sm">Удалить</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
 
-{% endblock body %}
+</body>
+</html>
+
+{% endblock %}
+
