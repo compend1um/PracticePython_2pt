@@ -8,7 +8,8 @@ def homepage(request):
     return render(request, "homepage.html")
 
 def customers(request):
-    return render(request, "customers.html")
+    clients = Customer.objects.all()
+    return render(request, "customers.html", {"clients": clients})
 
 def sales_progress(request):
     return render(request, "sales_progress.html")
@@ -25,8 +26,13 @@ def create_gpu(request):
     create_gpus_new()
     return render(request, "create_gpu.html")
 
-def edit_client(request, id):
-    return render(request, "edit_client.html", context={"id":id})
+def edit_customer(request, id):
+    if request.method == "POST":
+        customer = Customer.objects.get(id=id)
+        customer.name = request.POST.get("customer")
+        customer.save()
+        return redirect("customers")
+    return render(request, "edit_customer.html")
 
 def edit_gpu(request, id):
     return render(request, "edit_gpu.html", context={"id":id})
@@ -35,14 +41,19 @@ def success_buy(request):
     return render(request, "success_buy.html")
 
 def create_client(request):
-    # return render(request, "create_client.html")
-    pass
 
-def delete_client(request, id):
+    if request.method == "POST":
+        customer = Customer()
+        customer.name = request.POST.get('customer')
+        customer.save()
+        return redirect("customers")
+    return redirect("customers")
+
+def delete_customer(request, id):
     try:
-        person = Customer.objects.get(id=id)
-        person.delete()
-        return redirect('customers') # Возвращаемся к списку
+        customer = Customer.objects.get(id=id)
+        customer.delete()
+        return redirect('customers')
     except Customer.DoesNotExist:
         return HttpResponseNotFound("<h2> Клиент не найден </h2>")
 

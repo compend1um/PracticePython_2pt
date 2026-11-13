@@ -8,7 +8,7 @@
     {% csrf_token %}
     <p>
         <label>Новое имя клиента:</label><br>
-        <input type="text" name="client" value="{{ client.name }}" required>
+        <input type="text" name="customer" value="{{ customer.name }}" required>
     </p>
     <button type="submit" class="btn btn-primary">Сохранить изменения</button><t>
     <a href="{% url 'customers' %}" class="btn btn-secondary">Отмена</a>
